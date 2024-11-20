@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsivelogin/my_hompage.dart';
 import 'package:responsivelogin/palletes.dart';
+import 'package:responsivelogin/signup.dart';
 import 'package:responsivelogin/src/singin_controller.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(
         useMaterial3: true,
       ).copyWith(scaffoldBackgroundColor: Pallete.backgroundColor),
-      home: const MyHompage(),
+      home: const CreateUser(),
     );
   }
 }
