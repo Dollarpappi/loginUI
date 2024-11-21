@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart ' as http;
+import 'package:http/http.dart' as http;
 import 'package:responsivelogin/src/snackbar.dart';
 
 class CreateAccount extends GetxController {
@@ -25,12 +25,14 @@ class CreateAccount extends GetxController {
           "email": email,
         });
 
-    if (userpost.statusCode == 200) {
+    print(userpost.body);
+
+    if (userpost.statusCode == 201) {
       showSnackbar(Colors.green, "Successful");
     } else {
-      showSnackbar(
-          Colors.red, jsonDecode(userpost.body)["details"] ?? "Failed");
+      showSnackbar(Colors.red, jsonDecode(userpost.body)["detail"] ?? "Failed");
     }
     isLoading.value = false;
+    update();
   }
 }

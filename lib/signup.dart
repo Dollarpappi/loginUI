@@ -4,7 +4,6 @@ import 'package:responsivelogin/src/create_account.dart';
 import 'package:responsivelogin/widget/gradient_button.dart';
 
 import 'widget/login_feild.dart';
-import 'widget/social_button.dart';
 
 class CreateUser extends StatefulWidget {
   const CreateUser({super.key});
@@ -14,11 +13,15 @@ class CreateUser extends StatefulWidget {
 }
 
 class _CreateUserState extends State<CreateUser> {
-  final createcontroller = Get.put(CreateAccount());
-
   TextEditingController emailCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
   TextEditingController usernamCtrl = TextEditingController();
+
+  @override
+  void initState() {
+    Get.put(CreateAccount());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class _CreateUserState extends State<CreateUser> {
         child: Center(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               //textfields
@@ -44,14 +47,18 @@ class _CreateUserState extends State<CreateUser> {
                 controller: passwordCtrl,
               ),
 
-              GetBuilder<CreateAccount>(builder: (controller) {
-                return GradientButton(
+              GetBuilder<CreateAccount>(
+                builder: (controller) {
+                  return GradientButton(
+                    isLoading: controller.isLoading.value,
                     onPressed: () => controller.creatUser(
-                          email: emailCtrl.text,
-                          password: passwordCtrl.text,
-                          name: usernamCtrl.text,
-                        ));
-              })
+                      email: emailCtrl.text,
+                      password: passwordCtrl.text,
+                      name: usernamCtrl.text,
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),
